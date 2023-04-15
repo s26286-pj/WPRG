@@ -1,0 +1,1 @@
+<h1>Standard page</h1>
