@@ -244,6 +244,25 @@ class DatabaseConnection
         return null;
     }
 
+    public function addComment(string | null $userId, string $postId, string $content) : bool {
+        $query;
+        if ($userId) {
+            $query = $this->query("INSERT INTO comments ( userId, postId, content ) VALUES ('$userId', '$postId', '$content')");
+        } else {
+            $query = $this->query("INSERT INTO comments ( userId, postId, content ) VALUES (NULL, '$postId', '$content')");
+        }
+        return !!$query;
+    }
+
+    public function getComments($postId) : array {
+        $arr = [];
+        $query = $this->query("SELECT comments.content, users.login, comments.created FROM comments LEFT JOIN users ON comments.userId=users.id WHERE comments.postId = '$postId'");
+        while($row = $query->fetch_object()){
+            array_push($arr, $row);
+        }
+        return $arr;
+    }
+
     public function deleteUser(string $id) : bool {
         $query = $this->query("DELETE FROM users WHERE id = '$id'");
         return !!$query;
