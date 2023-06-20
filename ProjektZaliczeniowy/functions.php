@@ -140,6 +140,7 @@ class DatabaseConnection
         if ($obj) {
             return new Post($obj);
         }
+        return null;
     }
 
     public function getPreviousPostId($id) : ?string {
