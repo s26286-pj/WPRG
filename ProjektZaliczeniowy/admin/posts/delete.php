@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/../../functions.php';
+session_start();
 $db = new DatabaseConnection();
 $user = new User($_SESSION['user']);
 
@@ -10,4 +11,4 @@ if (isset($_GET['id']) && $user && $user->canPost()) {
     } else {
         echo "Błąd";
     }
-} 
+}

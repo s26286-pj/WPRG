@@ -1,8 +1,10 @@
 <?php
     require __DIR__ . '/../../functions.php';
     $db = new DatabaseConnection();
+    session_start();
     $user = new User($_SESSION['user']);
     if ($user && $user->canPost()) {
+        $posts = $db->getPosts(true);
 ?>
 
 <table>

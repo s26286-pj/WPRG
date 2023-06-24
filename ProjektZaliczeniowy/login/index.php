@@ -1,7 +1,6 @@
 <?php
 session_start();
 require __DIR__ . '/../functions.php';
-    var_dump($_SESSION['user']);
     
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $login = $_POST["login"];
@@ -9,7 +8,8 @@ require __DIR__ . '/../functions.php';
         $db = new DatabaseConnection();
         $isAuthenticated = $db->authenticate($login, $password);
         if ($isAuthenticated) {
-            var_dump('ok');
+            echo "Zalogowano!";
+            die();
         }
     } else {
         $login = "";
